@@ -8,7 +8,7 @@ import datetime
 
 # Excel文件名称
 # file_name = 'sp.xls'
-file_name = 'sp_2.xls'
+file_name = 'pppp.xls'
 
 # 读取Excel文件中所有数据
 data = xlrd.open_workbook(file_name)
@@ -43,7 +43,9 @@ for index in range(rows):
         # name = line[3].encode('utf-8')
         name = line[3]
         # 读取该行 日期，星期
-        datetime_tuple = xlrd.xldate_as_tuple(line[7], 0)
+        # datetime_tuple = xlrd.xldate_as_tuple(line[7], 0)
+        # 将之前的 实验开始时间 修改为 登记时间
+        datetime_tuple = xlrd.xldate_as_tuple(line[4], 0)
         date = datetime.date(datetime_tuple[0], datetime_tuple[1], datetime_tuple[2])
         weekday = date.weekday() + 1
         # 读取该行 持续时间
@@ -58,7 +60,7 @@ for index in range(rows):
 fixted_data_list = sorted(data_list, key=sorted_key)
 
 
-#  诚信
+#  数据输出
 def do_print(x):
     return ' '.join([x[0].encode('utf-8'), str(x[1]), str(x[2]), str(x[3])])
 
@@ -78,7 +80,7 @@ for data_line in fixted_data_list:
     # print do_print(data_line)
 
 # for x in fixted_data_list:
-f = open('sp_2_2.txt', 'a+')
+f = open('sp.txt', 'a+')
 for x in xx_list:
     data_line = [x[0].encode('utf-8'), str(x[1]), str(x[2]), str(x[3])]
     print ' '.join(data_line)
